@@ -1,5 +1,6 @@
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
 import admin from 'firebase-admin';
+import { auth as firebaseAuth } from '../config/firebase.config';
 
 // Extend Express Request interface to include 'user' property
 interface CustomRequest extends ExpressRequest {
@@ -7,6 +8,14 @@ interface CustomRequest extends ExpressRequest {
 }
 
 export const authenticateToken = async (req: CustomRequest, res: Response, next: NextFunction): Promise<void> => {
+    if (!firebaseAuth) {
+        res.status(500).json({
+            message:
+                'Firebase Admin is not configured on the backend. Set FIREBASE_SERVICE_ACCOUNT_BASE64 or GOOGLE_APPLICATION_CREDENTIALS / FIREBASE_SERVICE_ACCOUNT_PATH.',
+        });
+        return;
+    }
+
     const authHeader = req.headers.authorization;
     const token = authHeader?.split(' ')[1]; // Expecting "Bearer <token>"
 
@@ -16,7 +25,7 @@ export const authenticateToken = async (req: CustomRequest, res: Response, next:
     }
 
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
+        const decodedToken = await firebaseAuth.verifyIdToken(token);
         req.user = decodedToken; // Attach decoded user info to the request object
         console.log(`[auth]: User authenticated: ${decodedToken.uid}`);
         next(); // Proceed to the next middleware or route handler
@@ -41,9 +50,11 @@ export const optionalAuth = async (req: CustomRequest, res: Response, next: Next
     const authHeader = req.headers.authorization;
     const token = authHeader?.split(' ')[1];
 
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'backend/src/middleware/auth.middleware.ts:optionalAuth',message:'optionalAuth entry',data:{path:String((req as any).originalUrl||''),hasAuthHeader:Boolean(authHeader),tokenLen:(token||'').length},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
+    // If Firebase isn't configured, continue as anonymous.
+    if (!firebaseAuth) {
+        next();
+        return;
+    }
 
     if (!token) {
         // No token provided - continue as anonymous
@@ -52,13 +63,9 @@ export const optionalAuth = async (req: CustomRequest, res: Response, next: Next
     }
 
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
+        const decodedToken = await firebaseAuth.verifyIdToken(token);
         req.user = decodedToken;
         console.log(`[auth]: User authenticated: ${decodedToken.uid}`);
-
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'backend/src/middleware/auth.middleware.ts:optionalAuth:ok',message:'optionalAuth verified token',data:{path:String((req as any).originalUrl||''),userAttached:Boolean((req as any).user)},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
 
         next();
     } catch (error: unknown) {
@@ -66,10 +73,6 @@ export const optionalAuth = async (req: CustomRequest, res: Response, next: Next
         if (error instanceof Error) {
             console.warn("[auth]: Optional auth failed, continuing as anonymous:", error.message);
         }
-
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'backend/src/middleware/auth.middleware.ts:optionalAuth:fail',message:'optionalAuth verify failed',data:{path:String((req as any).originalUrl||''),errorMessage:String((error as any)?.message||'')},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
 
         next();
     }

@@ -13,6 +13,14 @@ interface CustomRequest extends Request {
 // Placeholder for signup function
 export const signup = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
+        if (!auth || !db) {
+            res.status(500).json({
+                message:
+                    'Firebase Admin is not configured on the backend. Set FIREBASE_SERVICE_ACCOUNT_BASE64 or GOOGLE_APPLICATION_CREDENTIALS / FIREBASE_SERVICE_ACCOUNT_PATH.',
+            });
+            return;
+        }
+
         const { email, password, displayName } = req.body;
 
         // Basic validation

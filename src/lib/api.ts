@@ -30,10 +30,6 @@ const apiClient = axios.create({
 // Request interceptor to attach Firebase ID Token
 apiClient.interceptors.request.use(
   (config) => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'src/lib/api.ts:request',message:'axios request',data:{baseURL:String(config.baseURL||''),url:String(config.url||''),method:String(config.method||''),hasToken:Boolean(localStorage.getItem('firebaseIdToken')),tokenLen:(localStorage.getItem('firebaseIdToken')||'').length},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
-
     // Get the token from local storage (stored by AuthContext)
     const token = localStorage.getItem('firebaseIdToken');
     if (token) {
@@ -55,16 +51,9 @@ apiClient.interceptors.request.use(
 // Add a response interceptor for global error handling
 apiClient.interceptors.response.use(
   (response) => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'src/lib/api.ts:response',message:'axios response',data:{url:String(response.config?.url||''),status:Number(response.status)},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'E'})}).catch(()=>{});
-    // #endregion
     return response; // Return successful responses directly
   },
   (error) => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'src/lib/api.ts:error',message:'axios error',data:{url:String(error?.config?.url||''),status:Number(error?.response?.status||0),hasResponse:Boolean(error?.response),hasRequest:Boolean(error?.request),message:String(error?.message||''),responseMessage:String(error?.response?.data?.message||''),responseKeys:error?.response?.data?Object.keys(error.response.data).slice(0,10):[]},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'C'})}).catch(()=>{});
-    // #endregion
-
     // Handle common errors globally
     if (error.response) {
       const { status } = error.response;
