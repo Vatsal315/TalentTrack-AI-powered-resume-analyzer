@@ -1,5 +1,6 @@
 import admin from 'firebase-admin';
 import dotenv from 'dotenv';
+import fs from 'fs';
 import path from 'path';
 
 // Ensure env vars are loaded before reading them
@@ -12,6 +13,19 @@ const serviceAccountPath =
 
 let credential: admin.credential.Credential | null = null;
 
+function loadServiceAccountFromFile(filePath: string): admin.credential.Credential | null {
+  try {
+    const resolved = path.resolve(filePath);
+    if (!fs.existsSync(resolved)) return null;
+    const jsonString = fs.readFileSync(resolved, 'utf-8');
+    const serviceAccount = JSON.parse(jsonString);
+    return admin.credential.cert(serviceAccount);
+  } catch (error) {
+    console.error(`[firebase-config]: Failed to load service account JSON from file: ${filePath}`, error);
+    return null;
+  }
+}
+
 if (serviceAccountBase64) {
   try {
     const json = Buffer.from(serviceAccountBase64, 'base64').toString('utf-8');
@@ -21,21 +35,23 @@ if (serviceAccountBase64) {
     credential = null;
   }
 } else if (serviceAccountPath) {
-  try {
-    credential = admin.credential.cert(path.resolve(serviceAccountPath));
-  } catch (error) {
-    console.error(
-      `[firebase-config]: Failed to load service account JSON from path: ${serviceAccountPath}`,
-      error
-    );
-    credential = null;
-  }
-} else {
+  credential = loadServiceAccountFromFile(serviceAccountPath);
+}
+
+// Dev fallback: if no env var provided (or it points to a missing file), try a local ignored key file.
+// Put your service account at backend/keys/serviceAccount.json (it's gitignored).
+if (!credential) {
+  const localFallbackPath = path.resolve(__dirname, '../../keys/serviceAccount.json');
+  credential = loadServiceAccountFromFile(localFallbackPath);
+}
+
+if (!credential) {
   // Don't crash the entire server if Firebase Admin isn't configured.
   // Endpoints that require auth/db should return a clear error instead.
   console.warn(
-    '[firebase-config]: No Firebase service account provided. ' +
-      'Set FIREBASE_SERVICE_ACCOUNT_BASE64 or GOOGLE_APPLICATION_CREDENTIALS / FIREBASE_SERVICE_ACCOUNT_PATH to enable Firebase Admin.'
+    '[firebase-config]: Firebase Admin is not configured. ' +
+      'Set FIREBASE_SERVICE_ACCOUNT_BASE64 or GOOGLE_APPLICATION_CREDENTIALS / FIREBASE_SERVICE_ACCOUNT_PATH ' +
+      '(or create backend/keys/serviceAccount.json for local dev).'
   );
 }
 

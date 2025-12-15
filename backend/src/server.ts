@@ -37,7 +37,9 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: (origin, callback) => {
-        const allowed = !origin || allowedOrigins.includes(origin);
+        // In local development, allow any origin (useful when accessing via LAN IP like 192.168.x.x)
+        const isDev = process.env.NODE_ENV !== 'production';
+        const allowed = !origin || allowedOrigins.includes(origin) || isDev;
 
         if (allowed) return callback(null, true);
         return callback(new Error(`Not allowed by CORS: ${origin}`));

@@ -232,10 +232,6 @@ export const getUploadedResumes = async (req: CustomRequest, res: Response): Pro
 
         const userResumes = getResumesByUser(userId);
 
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'backend/src/controllers/resume.controller.ts:getUploadedResumes',message:'getUploadedResumes',data:{userType:userId==='anonymous'?'anonymous':'authed',count:Array.isArray(userResumes)?userResumes.length:-1},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
-
         if (userResumes.length === 0) {
             console.log(`[getResumes]: No uploaded resumes found for user ${userId}`);
             res.status(200).json({ resumes: [] }); // Return empty array, not an error

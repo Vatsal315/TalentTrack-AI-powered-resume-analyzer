@@ -73,10 +73,6 @@ export function getResumeForUser(
         resumes[id] = updated;
         writeResumes(resumes);
 
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'backend/src/utils/localStorage.ts:getResumeForUser',message:'claimed anonymous resume',data:{resumeId:id,from:'anonymous',to:'authed'},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'G'})}).catch(()=>{});
-        // #endregion
-
         return updated;
     }
 

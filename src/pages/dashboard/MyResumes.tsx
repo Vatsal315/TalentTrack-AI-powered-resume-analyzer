@@ -55,10 +55,6 @@ export default function MyResumes() {
       setIsLoading(true);
       setError(null);
       try {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'src/pages/dashboard/MyResumes.tsx:fetchData',message:'fetch resumes start',data:{paths:['/resumes','/builder/generated']},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'D'})}).catch(()=>{});
-        // #endregion
-
         const [uploadedRes, generatedRes] = await Promise.all([
           apiClient.get('/resumes'),
           apiClient.get('/builder/generated')
@@ -81,9 +77,6 @@ export default function MyResumes() {
       } catch (err: any) {
         console.error("Error fetching resumes:", err);
         const message = err.response?.data?.message || err.message || "Failed to load your resumes.";
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/87199f04-e26a-4732-af6e-c50d61b27704',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'src/pages/dashboard/MyResumes.tsx:catch',message:'fetch resumes failed',data:{message:String(message),status:Number(err?.response?.status||0),hasResponse:Boolean(err?.response),hasRequest:Boolean(err?.request)},timestamp:Date.now(),sessionId:'debug-session',runId:'pre-fix',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
         setError(message);
         toast.error(`Error loading resumes: ${message}`);
       } finally {
