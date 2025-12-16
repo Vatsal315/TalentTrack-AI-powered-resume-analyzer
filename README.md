@@ -29,30 +29,7 @@ TalentTrack is a full‑stack **AI‑powered applicant tracking system** that he
 ## Screenshots 📸
 Here's a visual tour of TalentTrack:
 
-| Screenshot 1 | Screenshot 2 |
-|--------------|--------------|
-| ![Screenshot 1](public/screenshots/Screenshot%202025-07-16%20144141.png) | ![Screenshot 2](public/screenshots/Screenshot_16-7-2025_142356_ai-career-forge.vercel.app.jpeg) |
-| *Hero Section* | *Home Page* |
-
-| Screenshot 3 | Screenshot 4 |
-|--------------|--------------|
-| ![Screenshot 3](public/screenshots/Screenshot_16-7-2025_14465_ai-career-forge.vercel.app.jpeg) | ![Screenshot 4](public/screenshots/Screenshot_16-7-2025_144814_ai-career-forge.vercel.app.jpeg) |
-| *Resume Analysis* | *Resume Builder* |
-
-| Screenshot 5 | Screenshot 6 |
-|--------------|--------------|
-| ![Screenshot 5](public/screenshots/Screenshot_16-7-2025_153954_ai-career-forge.vercel.app.jpeg) | ![Screenshot 6](public/screenshots/Screenshot_16-7-2025_154059_ai-career-forge.vercel.app.jpeg) |
-| *Job Matching* | *Cover Letter Generation* |
-
-| Screenshot 7 | Screenshot 8 |
-|--------------|--------------|
-| ![Screenshot 7](public/screenshots/Screenshot_16-7-2025_154339_ai-career-forge.vercel.app.jpeg) | ![Screenshot 8](public/screenshots/Screenshot_16-7-2025_154425_ai-career-forge.vercel.app.jpeg) |
-| *Cover Letter Result* | *Help & Tips* |
-
-| Screenshot 9 | Screenshot 10 |
-|--------------|--------------|
-| ![Screenshot 9](public/screenshots/Screenshot_16-7-2025_15444_ai-career-forge.vercel.app.jpeg) | ![Screenshot 10](public/screenshots/screenshot-1752657460493.png) |
-| *Used Documents* | *Dashboard* |
+<img width="2948" height="1590" alt="image" src="https://github.com/user-attachments/assets/28221fc6-e6aa-469d-ae7a-2e80798085c7" />
 
 ## Features ✨
 *   **User Authentication:** Secure signup and login functionality using Firebase Authentication.
