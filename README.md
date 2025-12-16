@@ -6,7 +6,6 @@
   </a>
 </p>
 
-![Banner](public/screenshots/banner1.png)
 
 TalentTrack is a full‑stack **AI‑powered applicant tracking system** that helps with **resume analysis**, **job matching**, and **ATS‑ready resume exports**.
 
@@ -30,6 +29,17 @@ TalentTrack is a full‑stack **AI‑powered applicant tracking system** that he
 Here's a visual tour of TalentTrack:
 
 <img width="2948" height="1590" alt="image" src="https://github.com/user-attachments/assets/28221fc6-e6aa-469d-ae7a-2e80798085c7" />
+
+<img width="3024" height="1650" alt="image" src="https://github.com/user-attachments/assets/ddd66549-a138-4cb4-8c97-f538f69c7cd1" />
+
+<img width="2898" height="1572" alt="image" src="https://github.com/user-attachments/assets/5a6be3fd-89d8-47e2-a989-5262a8d75d20" />
+
+<img width="3020" height="1558" alt="image" src="https://github.com/user-attachments/assets/70f3aa3e-3f69-409d-9c82-9aaad0554127" />
+
+<img width="3014" height="1656" alt="image" src="https://github.com/user-attachments/assets/2162b700-efc3-4674-8451-e6023b1c4cd2" />
+
+
+
 
 ## Features ✨
 *   **User Authentication:** Secure signup and login functionality using Firebase Authentication.
@@ -247,6 +257,8 @@ Please ensure your code adheres to the existing style and that any new features 
 
 ## License 📄
 This project is licensed under the MIT License. See the `LICENSE` file for details (if one is created, otherwise assume MIT).
+
+Made by GAME OF CODES (VATSAL)
 
 
 
