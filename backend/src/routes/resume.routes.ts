@@ -17,7 +17,15 @@ router.get(
 router.post(
     '/upload',
     optionalAuth, // Attach user if token is provided, otherwise continue as anonymous
-    upload.single('resumeFile'), // Handle single file upload named 'resumeFile'
+    // Handle single file upload named 'resumeFile' with graceful error response
+    (req, res, next) => {
+        upload.single('resumeFile')(req, res, (err: any) => {
+            if (err) {
+                return res.status(400).json({ message: err.message || 'Invalid file upload.' });
+            }
+            return next();
+        });
+    },
     uploadResume // Process the uploaded file
 );
 

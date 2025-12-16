@@ -32,9 +32,9 @@ export const authenticateToken = async (req: CustomRequest, res: Response, next:
     try {
         if (firebaseAuth) {
             const decodedToken = await firebaseAuth.verifyIdToken(token);
-            req.user = decodedToken; // Attach decoded user info to the request object
-            console.log(`[auth]: User authenticated: ${decodedToken.uid}`);
-            next(); // Proceed to the next middleware or route handler
+        req.user = decodedToken; // Attach decoded user info to the request object
+        console.log(`[auth]: User authenticated: ${decodedToken.uid}`);
+        next(); // Proceed to the next middleware or route handler
             return;
         }
 

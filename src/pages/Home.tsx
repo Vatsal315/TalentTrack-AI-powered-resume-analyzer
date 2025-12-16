@@ -57,15 +57,16 @@ const Home = () => {
           {/* Subtle grid pattern */}
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03]"></div>
           
-          {/* Accent circle */}
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-blue-50 opacity-60 blur-3xl"></div>
+          {/* Accent glow */}
+          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-indigo-50 opacity-70 blur-3xl"></div>
+          <div className="absolute -bottom-40 left-10 w-[28rem] h-[28rem] rounded-full bg-teal-50 opacity-60 blur-3xl"></div>
           
           {/* Animated dots */}
           <div className="hidden lg:block">
             {[...Array(6)].map((_, i) => (
               <div 
                 key={i}
-                className="absolute rounded-full bg-blue-600 opacity-10"
+                className="absolute rounded-full bg-indigo-600 opacity-10"
                 style={{
                   width: `${Math.random() * 6 + 4}px`,
                   height: `${Math.random() * 6 + 4}px`,
@@ -84,26 +85,26 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Text content */}
             <div className={`lg:col-span-5 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium mb-6">
-                <Zap size={14} className="mr-1.5" /> AI-Powered Resume Optimization
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                <Zap size={14} className="mr-1.5" /> AI‑Powered Applicant Tracking
               </div>
               
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-4 sm:mb-6 leading-tight">
-                AI Career Forge: <span className="relative inline-block">
+                TalentTrack: <span className="relative inline-block">
                   <span className="relative z-10">Transform</span>
-                  <span className="absolute bottom-1 left-0 w-full h-2 sm:h-3 bg-blue-100 -z-10"></span>
-                </span> your job search
+                  <span className="absolute bottom-1 left-0 w-full h-2 sm:h-3 bg-primary/15 -z-10"></span>
+                </span> your hiring workflow
               </h1>
               
               <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-8 leading-relaxed">
-                AI Career Forge helps you craft the perfect resume and optimize your job search strategy with advanced AI analysis.
+                TalentTrack helps teams screen faster with AI-driven resume insights, keyword alignment, and clean ATS‑ready exports.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
               <Button 
                 size="lg" 
                 onClick={handleButtonClick}
-                className="w-full sm:w-auto rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm sm:text-base py-5 px-5 sm:px-6"
+                className="w-full sm:w-auto rounded-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm sm:text-base py-5 px-5 sm:px-6"
               >
                   <span className="mr-2">Start Optimizing</span>
                   <ArrowRight size={16} className="sm:size-[18px]" />
@@ -113,7 +114,7 @@ const Home = () => {
                   variant="ghost" 
                   size="lg" 
                   onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full sm:w-auto text-slate-600 hover:text-blue-600"
+                  className="w-full sm:w-auto text-slate-600 hover:text-primary"
                 >
                   See how it works <ChevronRight size={16} className="ml-1" />
                 </Button>
@@ -122,15 +123,15 @@ const Home = () => {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 pt-4 sm:pt-6 border-t border-slate-100">
                 <div>
-                  <div className="text-xl sm:text-2xl font-bold text-blue-600">94%</div>
+                  <div className="text-xl sm:text-2xl font-bold text-primary">94%</div>
                   <div className="text-xs sm:text-sm text-slate-500">ATS Pass Rate</div>
                 </div>
                 <div>
-                  <div className="text-xl sm:text-2xl font-bold text-blue-600">3x</div>
+                  <div className="text-xl sm:text-2xl font-bold text-primary">3x</div>
                   <div className="text-xs sm:text-sm text-slate-500">More Interviews</div>
                 </div>
                 <div>
-                  <div className="text-xl sm:text-2xl font-bold text-blue-600">10k+</div>
+                  <div className="text-xl sm:text-2xl font-bold text-primary">10k+</div>
                   <div className="text-xs sm:text-sm text-slate-500">Users</div>
                 </div>
               </div>
@@ -156,13 +157,13 @@ const Home = () => {
                     {/* Header */}
                     <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
                       <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center mr-3">
+                        <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center mr-3">
                           <FileText size={16} className="text-white" />
                         </div>
                         <span className="font-medium text-slate-800">Resume Analysis Dashboard</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full flex items-center">
+                        <div className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full flex items-center">
                           <BarChart size={12} className="mr-1" /> Pro Version
                         </div>
                       </div>
@@ -191,16 +192,16 @@ const Home = () => {
                       <div className="col-span-6 flex flex-col gap-2">
                         {/* Score card */}
                         <div className="bg-slate-50 rounded-lg p-4 h-28 flex items-center">
-                          <div className="w-20 h-20 rounded-full border-4 border-blue-100 flex items-center justify-center mr-4">
-                            <div className="text-xl font-bold text-blue-600">87%</div>
+                          <div className="w-20 h-20 rounded-full border-4 border-indigo-100 flex items-center justify-center mr-4">
+                            <div className="text-xl font-bold text-primary">87%</div>
                           </div>
                           <div className="flex flex-col justify-center">
                             <div className="font-medium mb-1 text-slate-800">ATS Compatibility</div>
                             <div className="flex items-center gap-1">
                               {[...Array(4)].map((_, i) => (
-                                <Star key={i} size={12} fill="#3b82f6" color="#3b82f6" />
+                                <Star key={i} size={12} fill="#4f46e5" color="#4f46e5" />
                               ))}
-                              <Star size={12} fill="transparent" color="#3b82f6" />
+                              <Star size={12} fill="transparent" color="#4f46e5" />
                             </div>
                           </div>
                         </div>
@@ -209,11 +210,11 @@ const Home = () => {
                         <div className="bg-slate-50 rounded-lg p-4 flex-1">
                           <div className="text-sm font-medium text-slate-600 mb-3">Suggested Keywords</div>
                           <div className="flex flex-wrap gap-2">
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">leadership</span>
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">analytics</span>
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">project management</span>
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">strategy</span>
-                            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">innovation</span>
+                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">leadership</span>
+                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">analytics</span>
+                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">project management</span>
+                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">stakeholder alignment</span>
+                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">impact metrics</span>
                           </div>
                         </div>
                       </div>
@@ -359,7 +360,7 @@ const Home = () => {
                 </div>
                 
                 <p className="text-slate-700 mb-6">
-                  "I landed 3 interviews in my first week after optimizing my resume with AI Career Forge. The keyword suggestions were spot-on for the tech industry."
+                  "We shortened time-to-screen by focusing on job-aligned keywords and consistent formatting with TalentTrack."
                 </p>
                 
                 <div className="flex items-center">
@@ -413,7 +414,7 @@ const Home = () => {
                 </div>
                 
                 <p className="text-slate-700 mb-6">
-                  "As a recent graduate with limited experience, I was struggling to get noticed. AI Resume Pro helped me highlight my skills in a way that caught recruiters' attention."
+                  "The role-fit insights helped us identify qualified candidates faster without sacrificing quality."
                 </p>
                 
                 <div className="flex items-center">
@@ -456,7 +457,7 @@ const Home = () => {
                   </svg>
                   
                   <p className="text-lg sm:text-xl md:text-2xl text-slate-700 font-medium mb-6 sm:mb-8 leading-relaxed">
-                    "Before using AI Resume Pro, my resume was getting lost in the ATS systems. Now I'm getting callbacks from 80% of the positions I apply to. The tailored keyword suggestions for each job posting made all the difference."
+                    "With TalentTrack, we reduced noise in early-stage screening and improved shortlist quality."
                   </p>
                   
                   <div className="flex items-center">

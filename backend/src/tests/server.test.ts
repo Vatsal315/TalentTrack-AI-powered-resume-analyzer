@@ -49,6 +49,6 @@ describe('GET / - Basic Server Test', () => {
         if (!app) throw new Error("App not initialized for testing");
         const response = await request(app).get('/');
         expect(response.statusCode).toBe(200);
-        expect(response.text).toBe('AI Resume Pro Backend is running!');
+        expect(response.text).toBe('TalentTrack Backend is running!');
     });
 }); 

@@ -60,7 +60,7 @@ app.use('/api/activity', activityRoutes); // Use activity routes
 
 // Basic route
 app.get('/', (req: Request, res: Response) => {
-    res.send('AI Resume Pro Backend is running!');
+    res.send('TalentTrack Backend is running!');
 });
 
 // Start the server only if running directly (not imported as a module)

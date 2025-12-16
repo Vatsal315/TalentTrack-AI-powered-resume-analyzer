@@ -65,7 +65,7 @@ const LoginPage: React.FC = () => {
                     <div className="w-full max-w-md space-y-6">
                         <div className="text-right w-full mb-4">
                             <span className="text-sm text-muted-foreground">Don't have an account? </span>
-                            <Link to="/signup" className="font-semibold text-theme-blue hover:underline text-sm">
+                            <Link to="/signup" className="font-semibold text-primary hover:underline text-sm">
                                 Sign Up
                             </Link>
                         </div>
@@ -103,7 +103,7 @@ const LoginPage: React.FC = () => {
                             </div>
                             <Button
                                 type="submit"
-                                className="w-full text-lg py-3 bg-theme-blue hover:bg-theme-blue/90 text-white mt-6"
+                                className="w-full text-lg py-3 bg-primary hover:bg-primary/90 text-primary-foreground mt-6"
                                 disabled={isLoading}
                             >
                                 <LogIn className="mr-2 h-5 w-5" />
@@ -113,7 +113,7 @@ const LoginPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-theme-blue to-theme-purple items-center justify-center p-12 text-white flex-col relative overflow-hidden">
+                <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-theme-blue to-theme-emerald items-center justify-center p-12 text-white flex-col relative overflow-hidden">
                     <div className="absolute inset-0 bg-opacity-10 bg-white backdrop-blur-sm"></div>
                     <div className="relative z-10 text-center space-y-6">
                         <Quote className="h-12 w-12 text-cyan-300 mx-auto" strokeWidth={1.5} />
@@ -121,11 +121,11 @@ const LoginPage: React.FC = () => {
                             Craft Your Future.
                         </h2>
                         <p className="text-xl font-light text-blue-100 max-w-md mx-auto">
-                            "Leverage AI to build a resume that stands out and matches you with the perfect job."
+                            "Refine your resume with ATS-friendly feedback and tailored keyword suggestions."
                         </p>
                         <div className="pt-4">
-                            <p className="font-semibold">AI Resume Pro</p>
-                            <p className="text-sm text-blue-200">Your Career Advancement Partner</p>
+                            <p className="font-semibold">TalentTrack</p>
+                            <p className="text-sm text-blue-200">AI‑Powered Applicant Tracking System</p>
                         </div>
                     </div>
                 </div>

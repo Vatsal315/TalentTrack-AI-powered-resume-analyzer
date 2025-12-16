@@ -1,5 +1,5 @@
 {
-  "name": "ai-career-forge",
+  "name": "talenttrack",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -84,7 +84,7 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
   },
-  "description": "**URL**: https://lovable.dev/projects/075bbe44-f134-4eb9-8d53-67af476d4538",
+  "description": "TalentTrack: AI-powered applicant tracking system with resume analysis, matching, and ATS-ready exports.",
   "main": "eslint.config.js",
   "repository": {
     "type": "git",

@@ -51,16 +51,41 @@ export const uploadResume = async (req: CustomRequest, res: Response): Promise<v
 
         // Parse based on mimetype
         if (file.mimetype === 'application/pdf') {
-            const data = await pdfParse(file.buffer);
-            parsedText = data.text;
-            console.log(`[upload]: PDF parsed successfully.`);
+            try {
+                const data = await pdfParse(file.buffer);
+                parsedText = data.text;
+                console.log(`[upload]: PDF parsed successfully.`);
+            } catch (e: any) {
+                const msg = String(e?.message || e || '');
+                console.warn(`[upload]: PDF text extraction failed: ${msg}`);
+                res.status(400).json({
+                    message:
+                        'Could not extract text from this PDF. Please upload a text-based PDF (not scanned/encrypted) or a DOCX file.',
+                });
+                return;
+            }
         } else if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-            const { value } = await mammoth.extractRawText({ buffer: file.buffer });
-            parsedText = value;
-            console.log(`[upload]: DOCX parsed successfully.`);
+            try {
+                const { value } = await mammoth.extractRawText({ buffer: file.buffer });
+                parsedText = value;
+                console.log(`[upload]: DOCX parsed successfully.`);
+            } catch (e: any) {
+                const msg = String(e?.message || e || '');
+                console.warn(`[upload]: DOCX text extraction failed: ${msg}`);
+                res.status(400).json({ message: 'Could not extract text from this DOCX file. Please try a different file.' });
+                return;
+            }
         } else {
             // This case should ideally be prevented by multer's fileFilter, but handle defensively
             res.status(400).json({ message: 'Unsupported file type' });
+            return;
+        }
+
+        if (!parsedText || !parsedText.trim()) {
+            res.status(400).json({
+                message:
+                    'No readable text was found in this file. If this is a scanned PDF/image-based resume, upload a DOCX or a text-based PDF.',
+            });
             return;
         }
 

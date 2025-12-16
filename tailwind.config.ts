@@ -64,9 +64,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				theme: {
-					blue: '#3B82F6',
+					// Rebrand palette: indigo primary + teal accent (professional, not the default bright blue)
+					blue: '#0B1F3B', // TalentTrack navy (used as theme-blue in legacy classes)
 					darkSlate: '#1E293B',
-					emerald: '#10B981',
+					emerald: '#14B8A6',
+					purple: '#0EA5E9',
 					lightBg: '#F8FAFC',
 					lightGray: '#E2E8F0',
 					mutedText: '#64748B'

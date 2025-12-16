@@ -241,7 +241,7 @@ export default function MyResumes() {
 
         <section>
           <h3 className="text-2xl font-semibold mb-4 flex items-center">
-            <Bot className="mr-3 h-6 w-6 text-theme-purple" /> AI Generated Resumes
+            <Bot className="mr-3 h-6 w-6 text-primary" /> AI Generated Resumes
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((i) => <ResumeSkeletonCard key={`generated-skel-${i}`} />)}
@@ -395,7 +395,7 @@ export default function MyResumes() {
 
       <section>
         <h3 className="text-2xl font-semibold mb-4 flex items-center">
-          <Bot className="mr-3 h-6 w-6 text-theme-purple" /> AI Generated Resumes
+          <Bot className="mr-3 h-6 w-6 text-primary" /> AI Generated Resumes
         </h3>
         {generatedResumes.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
